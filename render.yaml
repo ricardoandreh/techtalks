@@ -26,7 +26,7 @@ services:
     name: techtalks-ui
     runtime: node
     buildCommand: "cd frontend && pnpm install && pnpm run build"
-    startCommand: "pnpm run preview"
+    startCommand: "cd frontend && pnpm run preview"
     envVars:
       - key: VITE_API_URL
         value: "https://techtalks-api.onrender.com"
