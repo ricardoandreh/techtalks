@@ -10,7 +10,7 @@ services:
     name: techtalks-api
     runtime: python
     buildCommand: "cd backend && ./build.sh"
-    startCommand: "gunicorn core.asgi:application -k uvicorn.workers.UvicornWorker"
+    startCommand: "cd backend && gunicorn core.asgi:application -k uvicorn.workers.UvicornWorker"
     envVars:
       - key: DATABASE_URL
         fromDatabase:
