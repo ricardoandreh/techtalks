@@ -21,6 +21,12 @@ from decouple import config
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
+# Load and define envVars to create super user
+os.environ["DJANGO_SUPERUSER_USERNAME"] = config("DJANGO_SUPERUSER_USERNAME")
+os.environ["DJANGO_SUPERUSER_EMAIL"] = config("DJANGO_SUPERUSER_EMAIL")
+os.environ["DJANGO_SUPERUSER_PASSWORD"] = config("DJANGO_SUPERUSER_PASSWORD")
+
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
@@ -92,16 +98,9 @@ WSGI_APPLICATION = "core.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-# DATABASES = {
-#     "default": {
-#         "ENGINE": "django.db.backends.sqlite3",
-#         "NAME": BASE_DIR / "db.sqlite3",
-#     }
-# }
-
 DATABASES = {
     "default": dj_database_url.config(
-        default=config("DATABASE_URL"),
+        default=config("DATABASE_URL", default="sqlite:///db.sqlite3"),
         conn_max_age=600,
         conn_health_checks=True,
     )

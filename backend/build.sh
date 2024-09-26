@@ -6,7 +6,10 @@ set -o errexit
 pip install -r requirements.txt
 
 # Convert static asset files
-python3 manage.py collectstatic --no-input
+python manage.py collectstatic --no-input
 
 # Apply any outstanding database migrations
-python3 manage.py migrate
+python manage.py migrate
+
+# Create your super user (check your env vars)
+python manage.py createsuperuser --no-input
