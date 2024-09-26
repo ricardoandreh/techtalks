@@ -1,0 +1,32 @@
+databases:
+  - name: techtalks-db
+    plan: free
+    databaseName: techtalks
+    user: techtalks
+
+services:
+  - type: web
+    plan: free
+    name: techtalks-api
+    runtime: python
+    buildCommand: "cd backend && ./build.sh"
+    startCommand: "pdm run gunicorn core.asgi:application -k uvicorn.workers.UvicornWorker"
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: techtalks-db
+          property: connectionString
+      - key: SECRET_KEY
+        generateValue: true
+      - key: WEB_CONCURRENCY
+        value: 4
+
+  - type: web
+    plan: free
+    name: techtalks-ui
+    runtime: node
+    buildCommand: "cd frontend && pnpm install && pnpm run build"
+    startCommand: "pnpm run preview"
+    envVars:
+      - key: VITE_API_URL
+        value: "https://techtalks-api.onrender.com"
