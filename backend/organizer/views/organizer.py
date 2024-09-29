@@ -7,4 +7,4 @@ from rest_framework.viewsets import ModelViewSet
 class OrganizerViewSet(ModelViewSet):
     queryset = Organizer.objects.all()
     serializer_class = OrganizerSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = (IsAuthenticated,)

@@ -237,9 +237,8 @@ class OrganizerTests(APITestCase):
         token = login_response.data["access"]
 
         self.client.credentials(HTTP_AUTHORIZATION=f"Bearer {token}")
-        self.organizer_list_url = reverse("organizer-list")
-
         response = self.client.get(self.organizer_list_url, {"page": 1})
+
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertIn("results", response.data)
         self.assertEqual(len(response.data["results"]), self.page_size)
