@@ -1,12 +1,20 @@
 <script setup>
-defineProps({
+import { computed } from "vue";
+
+const { data } = defineProps({
   data: Object,
 });
+
+const buttonStyle = computed(() => ({
+  backgroundColor: data ? "#4CAF50" : "#FF6D62",
+}));
 </script>
 
 <template>
   <div class="card">
-    <button type="button">data is {{ data }}</button>
+    <button type="button" :style="buttonStyle">
+      API is <strong>{{ data ? "on" : "off" }}</strong>
+    </button>
     <p>
       Edit
       <code>components/HelloWorld.vue</code> to test HMR

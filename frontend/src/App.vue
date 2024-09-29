@@ -4,10 +4,11 @@ import { onMounted, ref } from "vue";
 import HelloWorld from "./components/HelloWorld.vue";
 
 const data = ref(null);
+const TEST_URL = `${import.meta.env.VITE_API_URL}/helloworld/`;
 
 onMounted(async () => {
   try {
-    const response = await axios.get(import.meta.env.VITE_API_URL);
+    const response = await axios.get(TEST_URL);
     data.value = response.data;
   } catch (err) {
     console.error("Erro ao buscar dados:", err);
