@@ -3,21 +3,22 @@ from django.http import JsonResponse
 from django.urls import include, path
 from drf_spectacular.views import (SpectacularAPIView, SpectacularRedocView,
                                    SpectacularSwaggerView)
+from organizer.views import OrganizerRegisterView, OrganizerViewSet
 from rest_framework.routers import DefaultRouter
 from rest_framework_simplejwt.views import (TokenObtainPairView,
                                             TokenRefreshView)
 
 router = DefaultRouter()
-
-# router.register()
+router.register(r"organizers", OrganizerViewSet)
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     # API
     path("api/", include(router.urls)),
     # Testing Request
-    path("", lambda _: JsonResponse({"foo": "bar"})),
-    # Simple JWT
+    path("helloworld/", lambda _: JsonResponse({"hello": "world"})),
+    # Auth (Simple JWT)
+    path("api/register/", OrganizerRegisterView.as_view(), name="organizer-register"),
     path("token/", TokenObtainPairView.as_view(), name="token_obtain_pair"),
     path("token/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
     # OpenAPI
