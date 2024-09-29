@@ -167,7 +167,7 @@ SPECTACULAR_SETTINGS = {
     "VERSION": "0.1.0",
 }
 
-# AUTH_USER_MODEL = "organizer.Organizer"
+AUTH_USER_MODEL = "organizer.Organizer"
 
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": ("rest_framework_simplejwt.authentication.JWTAuthentication",),
