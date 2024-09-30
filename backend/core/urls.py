@@ -3,6 +3,7 @@ from django.http import JsonResponse
 from django.urls import include, path
 from drf_spectacular.views import (SpectacularAPIView, SpectacularRedocView,
                                    SpectacularSwaggerView)
+from event.views import EventViewSet
 from organizer.views import OrganizerRegisterView, OrganizerViewSet
 from rest_framework.routers import DefaultRouter
 from rest_framework_simplejwt.views import (TokenObtainPairView,
@@ -10,6 +11,7 @@ from rest_framework_simplejwt.views import (TokenObtainPairView,
 
 router = DefaultRouter()
 router.register(r"organizers", OrganizerViewSet)
+router.register(r"events", EventViewSet)
 
 urlpatterns = [
     path("admin/", admin.site.urls),
