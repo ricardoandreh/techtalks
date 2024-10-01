@@ -1,3 +1,4 @@
+from coupon.views import CheckCouponValidityView, CouponViewSet
 from django.contrib import admin
 from django.http import JsonResponse
 from django.urls import include, path
@@ -12,11 +13,13 @@ from rest_framework_simplejwt.views import (TokenObtainPairView,
 router = DefaultRouter()
 router.register(r"organizers", OrganizerViewSet)
 router.register(r"events", EventViewSet)
+router.register(r"coupons", CouponViewSet)
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     # API
     path("api/", include(router.urls)),
+    path("api/coupon-validity/<str:code>/", CheckCouponValidityView.as_view(), name="coupon-validity"),
     # Testing Request
     path("helloworld/", lambda _: JsonResponse({"hello": "world"})),
     # Auth (Simple JWT)
