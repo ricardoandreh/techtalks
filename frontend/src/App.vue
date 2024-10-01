@@ -1,44 +1,39 @@
 <script setup>
-import axios from "axios";
-import { onMounted, ref } from "vue";
-import HelloWorld from "./components/HelloWorld.vue";
-
-const data = ref(null);
-const TEST_URL = `${import.meta.env.VITE_API_URL}/helloworld/`;
-
-onMounted(async () => {
-  try {
-    const response = await axios.get(TEST_URL);
-    data.value = response.data;
-  } catch (err) {
-    console.error("Erro ao buscar dados:", err);
-  }
-});
+import { RouterLink, RouterView } from "vue-router"
 </script>
 
 <template>
-  <div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
+  <div id="layout">
+    <header>
+      <div class="wrapper">
+        <nav>
+          <RouterLink :to="{ name: 'event-list' }">Events</RouterLink>
+        </nav>
+      </div>
+    </header>
+    <RouterView />
   </div>
-  <HelloWorld :data="data" />
 </template>
 
-<style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
+<style>
+#layout {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
 }
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
+nav {
+  padding: 30px;
 }
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
+nav a {
+  font-weight: bold;
+  color: #2c3e50;
+}
+nav a.router-link-exact-active {
+  color: #42b983;
+}
+h2 {
+  font-size: 20px;
 }
 </style>
