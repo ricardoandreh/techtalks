@@ -14,6 +14,9 @@ python manage.py collectstatic --no-input
 # Apply any outstanding database migrations
 python manage.py migrate
 
+# Compile translations from `django.po`
+python manage.py compilemessages
+
 # Check if superuser exists before creating
 if
   [ $(echo "from django.contrib.auth import get_user_model; User = get_user_model(); print(User.objects.filter(is_superuser=True).exists())" | python manage.py shell) == "False" ];
