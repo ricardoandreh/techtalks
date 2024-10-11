@@ -30,3 +30,9 @@ services:
     envVars:
       - key: VITE_API_URL
         value: "https://techtalks-api.onrender.com"
+      - key: DJANGO_SUPERUSER_USERNAME
+        sync: false
+      - key: DJANGO_SUPERUSER_EMAIL
+        sync: false
+      - key: DJANGO_SUPERUSER_PASSWORD
+        sync: false
