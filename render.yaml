@@ -9,8 +9,9 @@ services:
     plan: free
     name: techtalks-api
     runtime: python
-    buildCommand: "cd backend && ./build.sh"
-    startCommand: "cd backend && python -m gunicorn core.asgi:application -k uvicorn.workers.UvicornWorker"
+    rootDir: backend
+    buildCommand: ./build.sh
+    startCommand: python -m gunicorn core.asgi:application -k uvicorn.workers.UvicornWorker
     envVars:
       - key: DATABASE_URL
         fromDatabase:
@@ -31,8 +32,9 @@ services:
     plan: free
     name: techtalks-ui
     runtime: node
-    buildCommand: "cd frontend && pnpm install && pnpm run build"
-    startCommand: "cd frontend && pnpm run preview --host 0.0.0.0"
+    rootDir: frontend
+    buildCommand: pnpm install && pnpm run build
+    startCommand: pnpm run preview --host 0.0.0.0
     envVars:
       - key: VITE_API_URL
-        value: "https://techtalks-api.onrender.com"
+        value: https://techtalks-api.onrender.com
