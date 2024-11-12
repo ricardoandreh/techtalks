@@ -37,4 +37,7 @@ services:
     startCommand: pnpm run preview --host 0.0.0.0
     envVars:
       - key: VITE_API_URL
-        value: https://techtalks-api.onrender.com
+        fromService:
+          type: web
+          name: techtalks-api
+          envVarKey: RENDER_EXTERNAL_URL
